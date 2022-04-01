@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import React from 'react';
 import styled from 'styled-components'
 
@@ -13,6 +14,8 @@ const Img = styled.img`
 
 function CardProdutos(props){
 
+    
+
     return(
         <div>
             <Img src = {props.foto}/>
@@ -23,5 +26,8 @@ function CardProdutos(props){
     )
  
 }
+
+
+
 export default CardProdutos;
 
