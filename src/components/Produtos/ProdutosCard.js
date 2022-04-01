@@ -11,17 +11,17 @@ const Img = styled.img`
  margin-top: 10px;
 `
 
-function CardProdutos(props){
+function CardProdutos(props) {
 
-    return(
+    return (
         <div>
-            <Img src = {props.foto}/>
+            <Img src={props.foto} />
             <p>{props.nome}</p>
             <p>R${props.preco}</p>
             <button onClick={''}>Adicionar no carrinho</button>
         </div>
     )
- 
+
 }
 export default CardProdutos;
 
