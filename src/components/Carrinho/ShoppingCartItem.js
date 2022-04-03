@@ -17,7 +17,7 @@ export default class ShoppingCartItem extends React.Component{
     render(){
         return(
             <Container>
-                <p>{this.props.itemCarrinho.qtd}x</p>
+                <p>{this.props.itemCarrinho.quantidade}x</p>
                 <p>{this.props.itemCarrinho.nome}</p>
                 <button onClick ={() => this.props.onRemoveProduto(this.props.itemCarrinho.id)}>Remover</button>
             </Container>

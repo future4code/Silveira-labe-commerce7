@@ -10,17 +10,23 @@ const Img = styled.img`
  margin-top: 10px;
 `
 
-function CardProdutos(props) {
+const BotaoDeAdicionar = styled.button`
+align-self: center;
+`
 
-    return (
-        <div>
-            <Img src={props.foto} />
-            <p>{props.nome}</p>
-            <p>R${props.preco}</p>
-            <button onClick={''}>Adicionar no carrinho</button>
-        </div>
-    )
+export default class CardProdutos extends React.Component {
 
+    render () {
+        const produto = this.props.produto
+        console.log(produto)
+        return (
+            <div>
+            <Img src={produto.props.foto}/>
+            <p> {produto.props.nome} </p>
+            <p> {produto.props.preco} </p>
+            <BotaoDeAdicionar onClick={() => this.props.adicionandoAoCarrinho(produto.props.id)}> Adicionar ao carrinho </BotaoDeAdicionar>
+            </div>
+        )
+    }
 }
-export default CardProdutos;
 

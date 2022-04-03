@@ -2,19 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 const FiltersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid black;
   padding: 10px;
   border: 2px solid black;
   width: 70%;
-  height: 38%;
+  height: 50%;
   margin-left: 10px;
   margin-top: 10px;
 `
 
 const Input = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-bottom: 5px;
 `
 

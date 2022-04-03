@@ -4,16 +4,24 @@ import Filters from './components/Filters';
 import ProdutosJson from './data/produtos.json';
 import ShoppingCart from './components/Carrinho/ShoppingCart';
 import CardProdutos from './components/Produtos/ProdutosCard'
+import Produtos from './components/Produtos/Produtos';
 
 const AppContainer = styled.div`
   display: grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: repeat(3, 1fr);
   padding: 16px;
   gap: 30px 30px;
   margin-top: 5px;
   margin-right: 50px;
 
 `;
+
+const HeaderApp = styled.div`
+display:flex;
+margin: auto;
+align-items: center;
+justify-content: space-evenly;
+`
 
 const App1 = styled.div`
   display: grid;
@@ -39,6 +47,7 @@ class App extends React.Component {
     sortingParameter: "nome",
     produtos: ProdutosJson,
     produtosNoCarrinho: [],
+    quantidade: " "
   }
 
   onChangeMinFilter = (event) => {
@@ -59,6 +68,31 @@ class App extends React.Component {
     })
   }
 
+  
+  adicionandoAoCarrinho = (produtoId) => {
+    const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => produtoId === produto.id)
+    if(produtoNoCarrinho) {
+      const novosProdutosNoCarrinho = this.state.produtosNoCarrinho.map(produto => {
+        if(produtoId === produto.id) {
+          return {
+            ...produto,
+            quantidade: produto.quantidade + 1
+          }
+        }
+        return produto 
+      })
+      this.setState({produtosNoCarrinho: novosProdutosNoCarrinho})
+    } else {
+      
+      const produtoParaAdicionar = this.state.produtos.find(produto => produtoId === produto.id)
+
+      const novosProdutosNoCarrinho = [this.state.produtosNoCarrinho, {...produtoParaAdicionar, quantidade: 1}]
+
+      this.setState({produtosNoCarrinho: novosProdutosNoCarrinho})
+    }
+
+  }
+
 
   onRemoveProduto = (idProduto) => {
     const upProdutosNoCarrinho = this.state.produtosNoCarrinho.map((produto) => {
@@ -66,11 +100,11 @@ class App extends React.Component {
       if (produto.id === idProduto) {
         return {
           ...produto,
-          qtd: produto.qtd - 1
+          quantidade: produto.quantidade - 1
         }
       }
       return produto;
-    }).filter((produto) => produto.qtd > 0)
+    }).filter((produto) => produto.quantidade > 0)
 
     this.setState({ produtosNoCarrinho: upProdutosNoCarrinho })
 
@@ -102,13 +136,24 @@ class App extends React.Component {
       .sort((a, b) => {
         return b.preco - a.preco
       })
-
-      
-
-
     return (
-      <App1>
 
+    <>
+      <HeaderApp>
+            <p> Quantidade de produtos: {produtosFiltrados.length} </p>
+            <label for="sort">Ordenação:
+              <select
+                value={this.state.sortingParameter}
+                onChange={this.onChangeSortingParameter}
+                name="sort"
+              >
+                <option value="nome">Nome</option>
+                <option value="preco">Preço</option>
+              </select>
+            </label>
+        </HeaderApp>
+
+      <App1>
 
         <Filters
           minFilter={this.state.minFilter}
@@ -120,39 +165,20 @@ class App extends React.Component {
         />
 
         <AppContainer>
-
-          <span>
-            <label for="sort">Ordenação: </label>
-            <select
-              value={this.state.sortingParameter}
-              onChange={this.onChangeSortingParameter}
-              name="sort"
-            >
-              <option value="nome">Nome</option>
-              <option value="preco">Preço</option>
-            </select>
-          </span>
-
-
-
-          {produtosFiltrados}
+          
+          <Produtos
+          produtosFiltrados={produtosFiltrados}
+          adicionandoAoCarrinho={this.adicionandoAoCarrinho}
+          />
         </AppContainer>
-{/* 
-          <CardProdutos foto={'https://images-americanas.b2w.io/produtos/4746981095/imagens/camiseta-masculina-cinza-raglan-plus-size-estampada-astronauta-planeta-ceu-lua-nave-espacial-estrelas-g2/4746981141_1_xlarge.jpg'} nome={'Camisa Astronauta'} preco={'200,00'} />
-          <CardProdutos foto={'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg'} nome={'Camisa Macaco'} preco={'200,00'} />
-          <CardProdutos foto={'https://i.pinimg.com/originals/e6/e2/c5/e6e2c51180e67e213a9e53e087102b3c.png'} nome={'Camisa Meu Uber Chegou'} preco={'200,00'} />
-          <CardProdutos foto={'https://images.tcdn.com.br/img/img_prod/737444/camiseta_nao_tem_vida_inteligente_aqui_nave_espacial_abduzido_131117_1_20200427181639.jpg'} nome={'Camisa Beam Me'} preco={'200,00'} />
-*/}
-   
-         <Carrinho className="carrinho"> 
+
+        <Carrinho className="carrinho"> 
           <ShoppingCart produtosNoCarrinho={this.state.produtosNoCarrinho} 
           onRemoveProduto={this.onRemoveProduto} />
-         
-
         </Carrinho> 
 
-
       </App1>
+    </>
     )
   }
 }
