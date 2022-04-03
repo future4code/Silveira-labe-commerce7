@@ -10,6 +10,22 @@ const Img = styled.img`
  margin-top: 10px;
 `
 
+<<<<<<< HEAD
+function CardProdutos(props) {
+
+    return (
+        <div>
+            <Img src={props.foto} />
+            <p>{props.nome}</p>
+            <p>R${props.preco}</p>
+            <button onClick={''}>Adicionar no carrinho</button>
+        </div>
+    )
+
+}
+export default CardProdutos;
+
+=======
 export default class ProdutosCard extends React.Component {
     render () {
             const produtos = this.props.listaDeProdutos
@@ -24,3 +40,4 @@ export default class ProdutosCard extends React.Component {
         )
     }
 }
+>>>>>>> master

@@ -1,4 +1,19 @@
 import React from 'react';
+<<<<<<< HEAD
+import styled from 'styled-components'
+import CardProdutos from './ProdutosCard';
+
+
+
+export class Produtos extends React.Component{
+
+
+
+
+}
+
+export default Produtos;
+=======
 import ProdutosCard from './ProdutosCard'
 
 export default class Produtos extends React.Component {
@@ -19,3 +34,4 @@ export default class Produtos extends React.Component {
         )
     }
 }
+>>>>>>> master
