@@ -1,37 +1,24 @@
-import React from 'react';
-<<<<<<< HEAD
+import React from "react";
 import styled from 'styled-components'
-import CardProdutos from './ProdutosCard';
+import ProdutosCard from "./ProdutosCard";
 
 
+const BlocoDeProdutos = styled.div`
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+`
 
-export class Produtos extends React.Component{
+export default class Produtos extends React.Component{
 
+    render () {
 
-
-
-}
-
-export default Produtos;
-=======
-import ProdutosCard from './ProdutosCard'
-
-export default class Produtos extends React.Component {
-
-    render() {
-        const listaDeProdutos = this.props.listaDeProdutos
         return (
-            <>
-                <span> Quantidade de produtos: {listaDeProdutos.length} </span>
-
-                <div>
-                    {listaDeProdutos.map((produto) => {
-                        return <ProdutosCard produtos={listaDeProdutos} adicionarProduto={this.props.adicionarProduto(produto)}/>
-                    })};
-                </div>
-
-            </>
+                <BlocoDeProdutos>
+                    <p> quantidade de produtos{this.props.produtos.length}</p>
+                   {this.props.produtos.map((produto) => {
+                       return <ProdutosCard produto={produto} adicionandoAoCarrinho={this.props.adicionandoAoCarrinho}/>
+                   })}
+                </BlocoDeProdutos>
         )
     }
 }
->>>>>>> master

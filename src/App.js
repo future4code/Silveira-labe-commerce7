@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components'
 import Produtos from './components/Produtos/Produtos';
 import Filters from './components/Filters';
-import Produtos from './components/Produtos/Produtos';
 import ProdutosJson from './data/produtos.json';
 import ShoppingCart from './components/Carrinho/ShoppingCart';
+import ProdutosCard from './components/Produtos/ProdutosCard';
 
 const AppContainer = styled.div`
   display: grid;
@@ -23,21 +23,7 @@ const App1 = styled.div`
   min-height: 100vh;
 
 `
-
-<<<<<<< HEAD
-
-const H1 = styled.h1`
-display: grid;
-grid-template-columns: 100px;
-margin-top: 200px;
-margin-left: 160px;
-
-`
-
-const Carrinho = styled.div`
-=======
 const Carrinho = styled.h2`
->>>>>>> master
   border: 2px solid black;
   width: 80%;
   height: 40%;
@@ -45,70 +31,16 @@ const Carrinho = styled.h2`
   margin-left: 10px;
 `
 
-const H2 = styled.h2`
-display: grid;
-grid-template-columns: 100px;
-margin-top: 180px;
-margin-left: 90px;
-`
-const listaDeProdutos = [
-  {
-    id: Date.now(),
-    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
-    nome: "Camisa macaco",
-    preco: "200,00"
-  },
-  {
-    id: Date.now(),
-    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
-    nome: "Camisa meu uber chegou",
-    preco: "280,00"
-  },
-  {
-    id: Date.now(),
-    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
-    nome: 'camisa macaco',
-    preco: "300,00"
-  },
-  {
-    id: Date.now(),
-    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
-    nome: "Camisa meu uber chegou",
-    preco: "100,00"
-  }
-]
-
 class App extends React.Component {
   state = {
     minFilter: "",
     maxFilter: "",
     nameFilter: "",
-<<<<<<< HEAD
     sortingParameter: "nome",
     produtos: ProdutosJson,
-    produtosNoCarrinho: [{
-      "id": 1,
-      "nome": "Camisa Astronauta",
-      "preco": 100,
-      "foto": "https://images-americanas.b2w.io/produtos/4746981095/imagens/camiseta-masculina-cinza-raglan-plus-size-estampada-astronauta-planeta-ceu-lua-nave-espacial-estrelas-g2/4746981141_1_xlarge.jpg",
-      "qtd": 2
-    },
-
-    {
-      "id": 2,
-      "nome": "Camisa Macaco",
-      "preco": 200,
-      "foto": "https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg",
-      "qtd": 3
-    }]
-=======
-    sortingParameter: "",
     produtosNoCarrinho: [],
-    quantidade: " "
->>>>>>> master
+    quantidade: ''
   }
-
-
 
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -128,14 +60,28 @@ class App extends React.Component {
     })
   }
 
-  adicionarProdutos = ((produtosId) => { 
-    const produtosParadicionar = listaDeProdutos.find(produto => produtosId === produto.id)
-    const novaListaDeProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtosParadicionar, quantidade: "1"}];
+  adicionandoAoCarrinho = (produtoId) => {
+    const produtoNoCarrinho = this.state.produtosNoCarrinho.find(produto => produtoId === produto.id)
+    if(produtoNoCarrinho) {
+      const novosProdutosNoCarrinho = this.state.produtosNoCarrinho.map(produto => {
+        if(produtoId === produto.id) {
+          return {
+            ...produto,
+            quantidade: produto.quantidade + 1
+          }
+        }
+        return produto 
+      })
+      this.setState({produtosNoCarrinho: novosProdutosNoCarrinho})
+    } else {
+      
+      const produtoParaAdicionar = this.state.produtos.find(produto => produtoId === produto.id)
 
-    this.setState({produtosNoCarrinho: novaListaDeProdutosNoCarrinho});
-  })
+      const novosProdutosNoCarrinho = [this.state.produtosNoCarrinho, {...produtoParaAdicionar, quantidade: 1}]
 
-
+      this.setState({produtosNoCarrinho: novosProdutosNoCarrinho})
+    }
+  }
 
   onRemoveProduto = (idProduto) => {
     const upProdutosNoCarrinho = this.state.produtosNoCarrinho.map((produto) => {
@@ -152,8 +98,6 @@ class App extends React.Component {
     this.setState({ produtosNoCarrinho: upProdutosNoCarrinho })
 
   }
-
-
 
   render() {
 
@@ -174,14 +118,11 @@ class App extends React.Component {
       }
     })
       .map(produto => {
-        return <CardProdutos foto={produto.foto} nome={produto.nome} preco={produto.preco} />
+        return <ProdutosCard foto={produto.foto} nome={produto.nome} preco={produto.preco} />
       })
       .sort((a, b) => {
         return b.preco - a.preco
       })
-
-      
-
 
     return (
       <App1>
@@ -198,8 +139,9 @@ class App extends React.Component {
 
         <AppContainer>
 
-<<<<<<< HEAD
+
           <span>
+            <p> Quantidade de produtos{this.state.produtos.length}</p>
             <label for="sort">Ordenação: </label>
             <select
               value={this.state.sortingParameter}
@@ -211,25 +153,13 @@ class App extends React.Component {
             </select>
           </span>
 
+          <Produtos
+          produtos={this.state.produtos}
+          adicionandoAoCarrinho={this.adicionandoAoCarrinho}/>
 
 
           {produtosFiltrados}
-
-{/* 
-          <CardProdutos foto={'https://images-americanas.b2w.io/produtos/4746981095/imagens/camiseta-masculina-cinza-raglan-plus-size-estampada-astronauta-planeta-ceu-lua-nave-espacial-estrelas-g2/4746981141_1_xlarge.jpg'} nome={'Camisa Astronauta'} preco={'200,00'} />
-          <CardProdutos foto={'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg'} nome={'Camisa Macaco'} preco={'200,00'} />
-          <CardProdutos foto={'https://i.pinimg.com/originals/e6/e2/c5/e6e2c51180e67e213a9e53e087102b3c.png'} nome={'Camisa Meu Uber Chegou'} preco={'200,00'} />
-          <CardProdutos foto={'https://images.tcdn.com.br/img/img_prod/737444/camiseta_nao_tem_vida_inteligente_aqui_nave_espacial_abduzido_131117_1_20200427181639.jpg'} nome={'Camisa Beam Me'} preco={'200,00'} />
-*/}
-        </AppContainer> 
-
-=======
-          <Produtos
-            listaDeProdutos= {listaDeProdutos}
-            adicionarProdutos={this.adicionarProdutos}
-          />
         </AppContainer>
->>>>>>> master
 
          <Carrinho className="carrinho"> 
           <ShoppingCart produtosNoCarrinho={this.state.produtosNoCarrinho} 

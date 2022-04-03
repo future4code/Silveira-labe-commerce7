@@ -1,43 +1,43 @@
-import React from 'react';
-import styled from 'styled-components';
 
-const Img = styled.img`
- width: 200px;   
- box-shadow: 3px 3px 3px 3px darkgray; 
- display: flex;
- flex-direction: column;
- align-items: center;
- margin-top: 10px;
+import React from "react";
+import styled from "styled-components";
+
+const ContainerCard = styled.div`
+border: 1px solid black;
+display: flex;
+flex-direction: column;
+`
+const CardInfo = styled.div`
+display: flex;
+flex-direction: column;
+padding: 16px;
+
+p {
+    margin: 4px 0;
+}
+`
+const ImagemProduto = styled.img`
+background-color: black;
+max-width: 220px;
 `
 
-<<<<<<< HEAD
-function CardProdutos(props) {
-
-    return (
-        <div>
-            <Img src={props.foto} />
-            <p>{props.nome}</p>
-            <p>R${props.preco}</p>
-            <button onClick={''}>Adicionar no carrinho</button>
-        </div>
-    )
-
-}
-export default CardProdutos;
-
-=======
+const BotaoDeAdicionar = styled.button`
+align-self: center;
+`
 export default class ProdutosCard extends React.Component {
+
     render () {
-            const produtos = this.props.listaDeProdutos
-            const funcaoDeAcionar = this.props.adicionarProduto
+        const produto = this.props.produto
         return (
-            <div>
-                <Img src={produtos.foto}/>
-                <p> {produtos.nome} </p>
-                <p> {produtos.preco} </p>
-                <button onClick={funcaoDeAcionar}> Adicionar ao carrinho </button> 
-            </div>
+            <ContainerCard>
+                <ImagemProduto src={produto.foto}/>
+                <CardInfo>
+                    <p> {produto.nome} </p>
+                    <p> {produto.preco} </p>
+                    <BotaoDeAdicionar onClick={() => this.props.adicionandoAoCarrinho(produto.id)}> Adicionar ao carrinho </BotaoDeAdicionar>
+                </CardInfo>
+            
+            </ContainerCard> 
         )
     }
 }
->>>>>>> master
