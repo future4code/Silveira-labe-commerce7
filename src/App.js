@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import CardProdutos from './components/Produtos/ProdutosCard';
+import Produtos from './components/Produtos/Produtos';
 import Filters from './components/Filters';
 import Produtos from './components/Produtos/Produtos';
 import ProdutosJson from './data/produtos.json';
@@ -24,6 +24,7 @@ const App1 = styled.div`
 
 `
 
+<<<<<<< HEAD
 
 const H1 = styled.h1`
 display: grid;
@@ -34,6 +35,9 @@ margin-left: 160px;
 `
 
 const Carrinho = styled.div`
+=======
+const Carrinho = styled.h2`
+>>>>>>> master
   border: 2px solid black;
   width: 80%;
   height: 40%;
@@ -47,13 +51,39 @@ grid-template-columns: 100px;
 margin-top: 180px;
 margin-left: 90px;
 `
-
+const listaDeProdutos = [
+  {
+    id: Date.now(),
+    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
+    nome: "Camisa macaco",
+    preco: "200,00"
+  },
+  {
+    id: Date.now(),
+    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
+    nome: "Camisa meu uber chegou",
+    preco: "280,00"
+  },
+  {
+    id: Date.now(),
+    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
+    nome: 'camisa macaco',
+    preco: "300,00"
+  },
+  {
+    id: Date.now(),
+    imagem: 'https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg',
+    nome: "Camisa meu uber chegou",
+    preco: "100,00"
+  }
+]
 
 class App extends React.Component {
   state = {
     minFilter: "",
     maxFilter: "",
     nameFilter: "",
+<<<<<<< HEAD
     sortingParameter: "nome",
     produtos: ProdutosJson,
     produtosNoCarrinho: [{
@@ -71,6 +101,11 @@ class App extends React.Component {
       "foto": "https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg",
       "qtd": 3
     }]
+=======
+    sortingParameter: "",
+    produtosNoCarrinho: [],
+    quantidade: " "
+>>>>>>> master
   }
 
 
@@ -92,6 +127,13 @@ class App extends React.Component {
       sortingParameter: event.target.value
     })
   }
+
+  adicionarProdutos = ((produtosId) => { 
+    const produtosParadicionar = listaDeProdutos.find(produto => produtosId === produto.id)
+    const novaListaDeProdutosNoCarrinho = [...this.state.produtosNoCarrinho, {...produtosParadicionar, quantidade: "1"}];
+
+    this.setState({produtosNoCarrinho: novaListaDeProdutosNoCarrinho});
+  })
 
 
 
@@ -156,6 +198,7 @@ class App extends React.Component {
 
         <AppContainer>
 
+<<<<<<< HEAD
           <span>
             <label for="sort">Ordenação: </label>
             <select
@@ -180,6 +223,13 @@ class App extends React.Component {
 */}
         </AppContainer> 
 
+=======
+          <Produtos
+            listaDeProdutos= {listaDeProdutos}
+            adicionarProdutos={this.adicionarProdutos}
+          />
+        </AppContainer>
+>>>>>>> master
 
          <Carrinho className="carrinho"> 
           <ShoppingCart produtosNoCarrinho={this.state.produtosNoCarrinho} 
