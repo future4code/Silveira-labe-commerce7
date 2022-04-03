@@ -10,7 +10,6 @@ const Img = styled.img`
  margin-top: 10px;
 `
 
-<<<<<<< HEAD
 function CardProdutos(props) {
 
     return (
@@ -25,19 +24,3 @@ function CardProdutos(props) {
 }
 export default CardProdutos;
 
-=======
-export default class ProdutosCard extends React.Component {
-    render () {
-            const produtos = this.props.listaDeProdutos
-            const funcaoDeAcionar = this.props.adicionarProduto
-        return (
-            <div>
-                <Img src={produtos.foto}/>
-                <p> {produtos.nome} </p>
-                <p> {produtos.preco} </p>
-                <button onClick={funcaoDeAcionar}> Adicionar ao carrinho </button> 
-            </div>
-        )
-    }
-}
->>>>>>> master
