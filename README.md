@@ -1,3 +1,3 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
- labecommerce-proj.surge.sh
+ https://labecommerce-proj.surge.sh
