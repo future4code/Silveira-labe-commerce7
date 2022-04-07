@@ -1,0 +1,29 @@
+[
+    {
+      "id": 1,
+      "nome": "Camisa Astronauta",
+      "preco": 100,
+      "foto": "https://images-americanas.b2w.io/produtos/4746981095/imagens/camiseta-masculina-cinza-raglan-plus-size-estampada-astronauta-planeta-ceu-lua-nave-espacial-estrelas-g2/4746981141_1_xlarge.jpg"
+    },
+
+    {
+      "id": 2,
+      "nome": "Camisa Macaco",
+      "preco": 200,
+      "foto": "https://cdn.awsli.com.br/600x700/236/236627/produto/964997251f5945b9b4.jpg"
+    },
+
+    {
+      "id": 3,
+      "nome": "Camisa Meu Uber Chegou",
+      "preco": 70,
+      "foto": "https://i.pinimg.com/originals/e6/e2/c5/e6e2c51180e67e213a9e53e087102b3c.png"
+    },
+
+    {
+      "id": 4,
+      "nome": "Camisa Beam Me",
+      "preco": 500,
+      "foto": "https://images.tcdn.com.br/img/img_prod/737444/camiseta_nao_tem_vida_inteligente_aqui_nave_espacial_abduzido_131117_1_20200427181639.jpg"
+    }
+  ]
